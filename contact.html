@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="styles.css" />
   
 </head>
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 <body>
   <header>
     <h1>Prince CPAs & Advisors</h1>
@@ -31,17 +32,12 @@
   <section class="section" aria-labelledby="contact-heading">
     <h3 id="contact-heading"><span>Send a Message</span></h3>
 
-    <form id="contact-form" novalidate>
-      <!-- Hidden spam-trap field (bots fill it; humans never see it) -->
-      <input
-        type="text"
-        name="company"
-        id="company"
-        autocomplete="off"
-        style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;"
-        tabindex="-1"
-        aria-hidden="true"
-      >
+    <form id="contact-form"
+      action="https://script.google.com/macros/s/AKfycbxUoo9Gn5JWr3pCKOt12iIC7Km-KJBDNs2-eKywn23ou8tNocT_R1qga2fH_CPH0RwG3w/exec"
+      method="POST"
+      target="hidden_iframe"
+      novalidate>
+
 
       <div class="row">
         <div>
@@ -74,97 +70,70 @@
   </footer>
 
   <script>
-    (function(){
-      // IMPORTANT:
-      // You must use the Apps Script *Web App* URL that ends in /exec
-      // Example: https://script.google.com/macros/s/XXXXX/exec
-      const ENDPOINT = "PASTE_YOUR_WEB_APP_EXEC_URL_HERE";
+(function(){
+  const form = document.getElementById('contact-form');
+  const btn = document.getElementById('submit-btn');
+  const statusEl = document.getElementById('status');
 
-      const form = document.getElementById('contact-form');
-      const btn = document.getElementById('submit-btn');
-      const statusEl = document.getElementById('status');
+  const errName = document.getElementById('err-name');
+  const errEmail = document.getElementById('err-email');
+  const errMsg = document.getElementById('err-message');
 
-      const errName = document.getElementById('err-name');
-      const errEmail = document.getElementById('err-email');
-      const errMsg = document.getElementById('err-message');
+  function setStatus(kind, msg){
+    statusEl.className = "status " + (kind || "");
+    statusEl.textContent = msg || "";
+    statusEl.style.display = msg ? "block" : "none";
+  }
 
-      function setStatus(kind, msg){
-        statusEl.className = "status " + (kind || "");
-        statusEl.textContent = msg || "";
-        statusEl.style.display = msg ? "block" : "none";
-      }
+  function clearErrors(){
+    errName.textContent = "";
+    errEmail.textContent = "";
+    errMsg.textContent = "";
+    setStatus("", "");
+  }
 
-      function clearErrors(){
-        errName.textContent = "";
-        errEmail.textContent = "";
-        errMsg.textContent = "";
-        setStatus("", "");
-      }
+  function isValidEmail(email){
+    return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+  }
 
-      function isValidEmail(email){
-        return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
-      }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    clearErrors();
 
-      form.addEventListener('submit', async function(e){
-        e.preventDefault();
-        clearErrors();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
 
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const message = document.getElementById('message').value.trim();
-        const company = document.getElementById('company').value.trim(); // spam trap
+    let ok = true;
+    if(!name){ errName.textContent = "Please enter your name."; ok = false; }
+    if(!email || !isValidEmail(email)){ errEmail.textContent = "Enter a valid email."; ok = false; }
+    if(!message){ errMsg.textContent = "Please add a brief message."; ok = false; }
+    if(!ok) return;
 
-        let ok = true;
-        if(!name){ errName.textContent = "Please enter your name."; ok = false; }
-        if(!email || !isValidEmail(email)){ errEmail.textContent = "Enter a valid email."; ok = false; }
-        if(!message){ errMsg.textContent = "Please add a brief message."; ok = false; }
+    // sanity check: action must be /exec URL
+    const action = (form.getAttribute("action") || "");
+    if(!action.includes("/exec")){
+      setStatus("bad", "Form isn’t configured yet: paste your Apps Script Web App /exec URL into the form action.");
+      return;
+    }
 
-        if(!ok) return;
+    btn.disabled = true;
+    const oldText = btn.textContent;
+    btn.textContent = "Sending...";
 
-        // If endpoint isn't set, fail loudly (common mistake)
-        if(!ENDPOINT || ENDPOINT.includes("https://script.google.com/macros/s/AKfycbxUoo9Gn5JWr3pCKOt12iIC7Km-KJBDNs2-eKywn23ou8tNocT_R1qga2fH_CPH0RwG3w/exec")){
-          setStatus("bad", "Form is not configured yet: paste your Apps Script Web App /exec URL into ENDPOINT.");
-          return;
-        }
+    // Submit to hidden iframe (avoids CORS)
+    form.submit();
 
-        btn.disabled = true;
-        const oldText = btn.textContent;
-        btn.textContent = "Sending...";
+    // UX: assume success if the browser submitted
+    setTimeout(() => {
+      form.reset();
+      setStatus("ok", "Message sent. We’ll get back to you promptly.");
+      btn.disabled = false;
+      btn.textContent = oldText;
+    }, 600);
+  });
+})();
+</script>
 
-        try {
-          const payload = {
-            name,
-            email,
-            message,
-            company, // bots fill this; humans don't
-            page: window.location.href,
-            userAgent: navigator.userAgent
-          };
-
-          const res = await fetch(ENDPOINT, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-
-          // Apps Script sometimes returns 200 even on errors; rely on JSON ok flag too.
-          const out = await res.json().catch(() => ({}));
-
-          if (!res.ok || out.ok !== true) {
-            throw new Error(out.error || "Submission failed.");
-          }
-
-          form.reset();
-          setStatus("ok", "Message sent. We’ll get back to you promptly.");
-        } catch (err) {
-          console.error(err);
-          setStatus("bad", "Sorry — something went wrong sending your message. Please try again.");
-        } finally {
-          btn.disabled = false;
-          btn.textContent = oldText;
-        }
-      });
-    })();
-  </script>
 </body>
 </html>
