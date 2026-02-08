@@ -265,7 +265,7 @@
 
       function clearErrors(){ errName.textContent=""; errEmail.textContent=""; errMsg.textContent=""; }
 
-      form.addEventListener('submit', function(e){
+      form.addEventListener('submit', async function(e){
         e.preventDefault();
         clearErrors();
 
@@ -280,15 +280,44 @@
 
         if(!ok) return;
 
-        const to = "alexprincecpa@gmail.com"; // TODO: replace with your real email
-        const subject = encodeURIComponent("Website Contact Form");
-        const body = encodeURIComponent(
-          `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-        );
-        const link = `mailto:${to}?subject=${subject}&body=${body}`;
+        // Send to Google Sheet via Apps Script Web App
+        const endpoint = "PASTE_YOUR_WEB_APP_URL_HERE";
 
         btn.disabled = true;
-        window.location.href = link;
+        btn.textContent = "Sending...";
+
+        try {
+          const payload = {
+            name,
+            email,
+            message,
+            company: document.getElementById('company').value, // spam trap
+            page: window.location.href,
+            userAgent: navigator.userAgent
+          };
+
+          const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          const out = await res.json().catch(() => ({}));
+
+          if (!res.ok || out.ok !== true) {
+            throw new Error(out.error || "Submission failed.");
+          }
+
+          // Success UX
+          form.reset();
+          alert("Message sent. We’ll get back to you promptly.");
+        } catch (err) {
+          console.error(err);
+          alert("Sorry — something went wrong sending your message. Please try again.");
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Send Message";
+        }
         setTimeout(()=>{ btn.disabled = false; }, 1200);
       });
     })();
