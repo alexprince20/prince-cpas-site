@@ -229,30 +229,19 @@
   <section class="section" aria-labelledby="contact-heading">
     <h3 id="contact-heading">Send a Message</h3>
 
-    <form name="contact" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="contact">
-      <div class="row">
-        <div>
-          <label for="name">Name <span class="visually-hidden">(required)</span></label>
-          <input type="text" id="name" name="name" autocomplete="name" required />
-          <div class="error" id="err-name" aria-live="polite"></div>
-        </div>
-        <div>
-          <label for="email">Email <span class="visually-hidden">(required)</span></label>
-          <input type="email" id="email" name="email" autocomplete="email" required />
-          <div class="error" id="err-email" aria-live="polite"></div>
-        </div>
-      </div>
+    <form id="contact-form" novalidate>
 
-      <div>
-        <label for="message">Message <span class="visually-hidden">(required)</span></label>
-        <textarea id="message" name="message" rows="6" required></textarea>
-        <div class="help">Please include any deadlines or specifics (e.g., audit year-end, services needed).</div>
-        <div class="error" id="err-message" aria-live="polite"></div>
-      </div>
+  <!-- Hidden spam-trap field (DO NOT remove) -->
+  <input
+    type="text"
+    name="company"
+    id="company"
+    autocomplete="off"
+    style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;"
+    tabindex="-1"
+    aria-hidden="true"
+  >
 
-      <button type="submit" id="submit-btn">Send Message</button>
-    </form>
   </section>
 
   <!-- Optional CTA band -->
