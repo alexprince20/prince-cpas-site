@@ -4,206 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact - Prince CPAs & Advisors</title>
-  <style>
-    :root{
-      --brand-green: #0b5f4b;
-      --brand-green-soft: #187d63;
-      --brand-blue: #115c99;
-      --brand-blue-soft: #2b7abc;
-      --brand-deep: #073242;
-      --brand-deep-soft: #0a4555;
-
-      --body-grad-top: #e6f0f2;
-      --body-grad-bottom: #d6e4ec;
-      --surface-main: #edf3f6;
-      --surface-soft: #f0f5f7;
-      --surface-card: #eaf1f5;
-      --border-soft: #cfdbe3;
-
-      --highlight-green: rgba(11, 95, 75, 0.35);
-      --highlight-blue: rgba(17, 92, 153, 0.25);
-
-      --field:#f1f5f7;
-      --border:#cfdbe3;
-      --shadow:0 6px 20px rgba(0,0,0,.08);
-
-      --ink:#222;
-    }
-
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:"Segoe UI", Arial, sans-serif;
-      color:var(--ink);
-      background:linear-gradient(180deg,var(--body-grad-top) 0%,var(--body-grad-bottom) 100%);
-      overflow-x:hidden; line-height:1.6;
-    }
-
-    /* Header + Nav (consistent) */
-    header{
-      text-align:center; padding:2rem 1rem; color:#fff;
-      background:
-        radial-gradient(circle at top left,var(--brand-green-soft) 0%, var(--brand-green) 45%, var(--brand-deep) 100%),
-        radial-gradient(circle at 120% 0%, var(--brand-blue-soft) 0%, var(--brand-blue) 55%, var(--brand-deep-soft) 100%);
-      position:relative; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.25);
-    }
-    header::after{
-      content:""; position:absolute; inset:0;
-      background:
-        radial-gradient(circle at 70% 120%, rgba(255,255,255,.12), transparent 60%),
-        radial-gradient(circle at 10% -20%, rgba(255,255,255,.10), transparent 65%);
-      pointer-events:none;
-    }
-    header h1{margin:0; font-size:clamp(2rem,4vw,3rem); letter-spacing:.5px}
-
-    nav{
-      position:sticky; top:0; z-index:10; text-align:center;
-      background:linear-gradient(
-        90deg,
-        var(--brand-deep) 0%,
-        var(--brand-green) 25%,
-        var(--brand-blue) 75%,
-        var(--brand-deep-soft) 100%
-      );
-      padding:.75rem 1rem; box-shadow:0 4px 14px rgba(0,0,0,.25);
-    }
-    nav a{
-      display:inline-block; margin:0 1rem; color:#fff; text-decoration:none; font-weight:600; letter-spacing:.3px;
-    }
-    nav a:hover{text-decoration:underline}
-
-    /* HERO – animated */
-    .hero{
-      position:relative; text-align:center; color:#fff; padding:6.5rem 1.5rem;
-      overflow:hidden; isolation:isolate;
-      background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(255,255,255,0.12), transparent 60%),
-        radial-gradient(900px 500px at 90% 120%, rgba(255,255,255,0.10), transparent 65%),
-        repeating-linear-gradient(
-          115deg,
-          rgba(255,255,255,0.05) 0px,
-          rgba(255,255,255,0.05) 2px,
-          rgba(0,0,0,0.00) 22px,
-          rgba(0,0,0,0.00) 46px
-        ),
-        linear-gradient(
-          135deg,
-          var(--brand-deep) 0%,
-          var(--brand-green) 30%,
-          var(--brand-blue-soft) 60%,
-          var(--brand-blue) 100%
-        );
-      background-size:140% 140%;
-      animation:heroScroll 40s linear infinite;
-    }
-    @keyframes heroScroll{
-      0%{background-position:0% 0%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 0%}
-    }
-    .hero::before{
-      content:""; position:absolute; inset:0;
-      background:radial-gradient(120% 120% at 50% 10%, transparent 40%, rgba(0,0,0,.32) 85%);
-      pointer-events:none;
-    }
-    .hero::after{
-      content:""; position:absolute; left:0; right:0; bottom:0; height:120px;
-      background:linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.4));
-      pointer-events:none;
-    }
-    .hero-panel{
-      position:relative; max-width:920px; margin:0 auto;
-      padding:1.75rem 1.5rem;
-      background:linear-gradient(180deg, rgba(5,18,24,.75), rgba(4,15,22,.6));
-      border:1px solid rgba(210,219,227,.4);
-      outline:1px solid rgba(0,0,0,.35);
-      border-radius:14px;
-      box-shadow:0 22px 55px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.18);
-      backdrop-filter:blur(4px);
-    }
-    .hero h2{
-      margin:0 0 .65rem 0; letter-spacing:.3px;
-      font-size:clamp(2rem,4vw,3rem); color:#fff;
-      text-shadow:0 2px 4px rgba(0,0,0,.6), 0 4px 16px rgba(0,0,0,.45), 0 0 28px rgba(0,0,0,.35);
-    }
-    .hero p{
-      margin:0 auto; max-width:760px; font-size:clamp(1rem,1.25vw,1.15rem);
-      opacity:.98; text-shadow:0 1px 1px rgba(0,0,0,.5), 0 3px 14px rgba(0,0,0,.4);
-    }
-
-    /* Sections */
-    .section{
-      position:relative; background:var(--surface-main); margin:3rem auto; padding:3rem 10%;
-      border-radius:20px; box-shadow:var(--shadow); max-width:900px;
-      border:1px solid var(--border-soft);
-    }
-    .section::before{
-      content:""; position:absolute; top:-80px; left:-100px; width:200px; height:200px;
-      background:radial-gradient(circle, var(--highlight-green) 0%, var(--highlight-blue) 70%);
-      opacity:.16; border-radius:50%; filter:blur(60px); z-index:-1;
-    }
-    .section h3{
-      margin:0 0 1.25rem 0; text-align:center; color:var(--brand-deep);
-      font-size:clamp(1.4rem,2.2vw,1.9rem);
-    }
-
-    /* Contact form styles */
-    form{
-      display:grid; gap:1rem; margin-top:1rem;
-    }
-    label{
-      font-weight:600; display:block; margin-bottom:.25rem;
-    }
-    input[type="text"],
-    input[type="email"],
-    textarea{
-      width:100%; padding:0.9rem 1rem; border:1px solid var(--border); border-radius:10px;
-      background:var(--field); box-shadow:inset 0 1px 2px rgba(0,0,0,.03);
-      font:inherit;
-      transition:border-color .15s ease, box-shadow .15s ease;
-    }
-    input:focus, textarea:focus{
-      outline:none; border-color:#8eb5c9;
-      box-shadow:0 0 0 4px rgba(17,92,153,.16);
-    }
-    textarea{ resize:vertical; min-height:140px }
-
-    .row{
-      display:grid; gap:1rem;
-    }
-    @media (min-width:700px){
-      .row{ grid-template-columns:1fr 1fr }
-    }
-
-    .help{
-      font-size:.92rem; opacity:.8; margin-top:.25rem;
-    }
-
-    button{
-      justify-self:start; background:linear-gradient(135deg,var(--brand-green-soft),var(--brand-blue-soft));
-      color:#fff; font-weight:800; border:none; border-radius:10px; padding:.9rem 1.25rem;
-      box-shadow:0 10px 24px rgba(0,0,0,.12);
-      cursor:pointer; transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
-    }
-    button:hover{ transform:translateY(-2px); box-shadow:0 14px 28px rgba(0,0,0,.18); opacity:.95 }
-    button:disabled{ opacity:.6; cursor:not-allowed }
-
-    /* CTA band (optional extra info) */
-    .cta{
-      text-align:center; color:#fff; padding:2rem 1.5rem; border-radius:16px;
-      margin:3rem 10%; background:linear-gradient(135deg,var(--brand-green),var(--brand-blue));
-      box-shadow:0 8px 30px rgba(0,0,0,.25);
-    }
-
-    footer{
-      text-align:center; padding:1rem; background:var(--brand-deep); color:#fff;
-      font-size:.92rem; margin-top:3rem;
-    }
-
-    /* Accessible error state */
-    .error{ color:#8b0000; margin:.25rem 0 0 0; font-size:.92rem }
-    .visually-hidden{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
+  
 </head>
 <body>
   <header>
@@ -221,49 +23,87 @@
   <section class="hero" aria-label="Contact Prince CPAs & Advisors">
     <div class="hero-panel">
       <h2>Contact Us</h2>
-      <p>Have a question or want to schedule a consultation? Send a message and we’ll get back to you promptly.</p>
+      <p>Send a message and we’ll get back to you promptly.</p>
     </div>
   </section>
 
   <!-- CONTACT FORM -->
   <section class="section" aria-labelledby="contact-heading">
-    <h3 id="contact-heading">Send a Message</h3>
+    <h3 id="contact-heading"><span>Send a Message</span></h3>
 
     <form id="contact-form" novalidate>
+      <!-- Hidden spam-trap field (bots fill it; humans never see it) -->
+      <input
+        type="text"
+        name="company"
+        id="company"
+        autocomplete="off"
+        style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;"
+        tabindex="-1"
+        aria-hidden="true"
+      >
 
-  <!-- Hidden spam-trap field (DO NOT remove) -->
-  <input
-    type="text"
-    name="company"
-    id="company"
-    autocomplete="off"
-    style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;"
-    tabindex="-1"
-    aria-hidden="true"
-  >
+      <div class="row">
+        <div>
+          <label for="name">Name <span class="visually-hidden">(required)</span></label>
+          <input type="text" id="name" name="name" autocomplete="name" required />
+          <div class="error" id="err-name" aria-live="polite"></div>
+        </div>
 
-  </section>
+        <div>
+          <label for="email">Email <span class="visually-hidden">(required)</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" required />
+          <div class="error" id="err-email" aria-live="polite"></div>
+        </div>
+      </div>
 
-  <!-- Optional CTA band -->
-  <section class="cta" aria-label="Other contact options">
-    <p style="margin:0;">
-      Prefer email? <strong>alexprincecpa@gmail.com</strong> &nbsp;•&nbsp; Phone: <strong>(870) 403-6180</strong>
-    </p>
+      <div>
+        <label for="message">Message <span class="visually-hidden">(required)</span></label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+        <div class="help">Include deadlines or specifics (e.g., year-end, services needed).</div>
+        <div class="error" id="err-message" aria-live="polite"></div>
+      </div>
+
+      <button type="submit" id="submit-btn">Send Message</button>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+    </form>
   </section>
 
   <footer>
-    <p>&copy; 2026 Prince CPAs &amp; Advisors. All rights reserved.</p>
+    <p>&copy; 2026 Prince CPAs & Advisors. All rights reserved.</p>
   </footer>
 
   <script>
     (function(){
+      // IMPORTANT:
+      // You must use the Apps Script *Web App* URL that ends in /exec
+      // Example: https://script.google.com/macros/s/XXXXX/exec
+      const ENDPOINT = "PASTE_YOUR_WEB_APP_EXEC_URL_HERE";
+
       const form = document.getElementById('contact-form');
       const btn = document.getElementById('submit-btn');
+      const statusEl = document.getElementById('status');
+
       const errName = document.getElementById('err-name');
       const errEmail = document.getElementById('err-email');
       const errMsg = document.getElementById('err-message');
 
-      function clearErrors(){ errName.textContent=""; errEmail.textContent=""; errMsg.textContent=""; }
+      function setStatus(kind, msg){
+        statusEl.className = "status " + (kind || "");
+        statusEl.textContent = msg || "";
+        statusEl.style.display = msg ? "block" : "none";
+      }
+
+      function clearErrors(){
+        errName.textContent = "";
+        errEmail.textContent = "";
+        errMsg.textContent = "";
+        setStatus("", "");
+      }
+
+      function isValidEmail(email){
+        return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+      }
 
       form.addEventListener('submit', async function(e){
         e.preventDefault();
@@ -272,18 +112,23 @@
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
         const message = document.getElementById('message').value.trim();
+        const company = document.getElementById('company').value.trim(); // spam trap
 
         let ok = true;
         if(!name){ errName.textContent = "Please enter your name."; ok = false; }
-        if(!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ errEmail.textContent = "Enter a valid email."; ok = false; }
+        if(!email || !isValidEmail(email)){ errEmail.textContent = "Enter a valid email."; ok = false; }
         if(!message){ errMsg.textContent = "Please add a brief message."; ok = false; }
 
         if(!ok) return;
 
-        // Send to Google Sheet via Apps Script Web App
-        const endpoint = "https://script.google.com/u/0/home/projects/1ey2gAHMQDidH-Th1P0K9QgqokKdwF7RNjIBbMD8PlYSkiU9DDXngb5TD/editPASTE_YOUR_WEB_APP_URL_HERE";
+        // If endpoint isn't set, fail loudly (common mistake)
+        if(!ENDPOINT || ENDPOINT.includes("https://script.google.com/macros/s/AKfycbxUoo9Gn5JWr3pCKOt12iIC7Km-KJBDNs2-eKywn23ou8tNocT_R1qga2fH_CPH0RwG3w/exec")){
+          setStatus("bad", "Form is not configured yet: paste your Apps Script Web App /exec URL into ENDPOINT.");
+          return;
+        }
 
         btn.disabled = true;
+        const oldText = btn.textContent;
         btn.textContent = "Sending...";
 
         try {
@@ -291,34 +136,33 @@
             name,
             email,
             message,
-            company: document.getElementById('company').value, // spam trap
+            company, // bots fill this; humans don't
             page: window.location.href,
             userAgent: navigator.userAgent
           };
 
-          const res = await fetch(endpoint, {
+          const res = await fetch(ENDPOINT, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
           });
 
+          // Apps Script sometimes returns 200 even on errors; rely on JSON ok flag too.
           const out = await res.json().catch(() => ({}));
 
           if (!res.ok || out.ok !== true) {
             throw new Error(out.error || "Submission failed.");
           }
 
-          // Success UX
           form.reset();
-          alert("Message sent. We’ll get back to you promptly.");
+          setStatus("ok", "Message sent. We’ll get back to you promptly.");
         } catch (err) {
           console.error(err);
-          alert("Sorry — something went wrong sending your message. Please try again.");
+          setStatus("bad", "Sorry — something went wrong sending your message. Please try again.");
         } finally {
           btn.disabled = false;
-          btn.textContent = "Send Message";
+          btn.textContent = oldText;
         }
-        setTimeout(()=>{ btn.disabled = false; }, 1200);
       });
     })();
   </script>
