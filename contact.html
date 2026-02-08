@@ -230,6 +230,7 @@
     <h3 id="contact-heading">Send a Message</h3>
 
     <form name="contact" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="contact">
       <div class="row">
         <div>
           <label for="name">Name <span class="visually-hidden">(required)</span></label>
@@ -240,8 +241,6 @@
           <label for="email">Email <span class="visually-hidden">(required)</span></label>
           <input type="email" id="email" name="email" autocomplete="email" required />
           <div class="error" id="err-email" aria-live="polite"></div>
-        </div>
-          <input type="hidden" name="form-name" value="contact"
         </div>
       </div>
 
@@ -259,7 +258,7 @@
   <!-- Optional CTA band -->
   <section class="cta" aria-label="Other contact options">
     <p style="margin:0;">
-      Prefer email? <strong>contact@princecpa.example</strong> &nbsp;•&nbsp; Phone: <strong>(555) 555-1234</strong>
+      Prefer email? <strong>alexprincecpa@gmail.com</strong> &nbsp;•&nbsp; Phone: <strong>(870) 403-6180</strong>
     </p>
   </section>
 
@@ -292,7 +291,7 @@
 
         if(!ok) return;
 
-        const to = "contact@princecpa.example"; // TODO: replace with your real email
+        const to = "alexprincecpa@gmail.com"; // TODO: replace with your real email
         const subject = encodeURIComponent("Website Contact Form");
         const body = encodeURIComponent(
           `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
