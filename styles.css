@@ -1,0 +1,128 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #fafafa;
+  color: #333;
+}
+
+header {
+  background-color: #800000;
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+  background-image: url('https://images.unsplash.com/photo-1565372529447-209b07f1b7df');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+header p {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+nav {
+  background-color: #006400;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ddd;
+}
+
+section {
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+  background-color: white;
+  margin-top: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  color: #800000;
+  margin-bottom: 1rem;
+}
+
+footer {
+  background-color: #800000;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 3rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input, textarea {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #006400;
+  color: white;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #004d00;
+}
+
+ul li {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.home-banner {
+  background-image: url('https://images.unsplash.com/photo-1549924231-f129b911e442');
+  background-size: cover;
+  background-position: center;
+  padding: 4rem 2rem;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.home-banner h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+}
+
+.home-banner p {
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
